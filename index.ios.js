@@ -12,11 +12,12 @@ import {
     View
 } from 'react-native';
 
-import {Answers} from 'react-native-fabric';
+import {Crashlytics, Answers} from 'react-native-fabric';
+import ErrorUtils from 'ErrorUtils'
 
 class testFabric extends Component {
     render() {
-        console.debug('print-render',this);
+        console.debug('print-render', this);
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>
@@ -34,11 +35,11 @@ class testFabric extends Component {
     }
 
     componentDidMount() {
-        console.debug('print-componentDidMount',this);
+        console.debug('print-componentDidMount', this);
 
-        Answers.logCustom('Performed a custom event', { bigData: true });
+        Answers.logCustom('Performed a custom event', {bigData: true});
 
-        Answers.logContentView('To-Do Edit', 'To-Do', 'to-do-42', { userid: 93 });
+        Answers.logContentView('To-Do Edit', 'To-Do', 'to-do-42', {userid: 93});
 
         Answers.logAddToCart(24.50, 'USD', 'Air Jordans', 'shoes', '987654', {color: 'red'});
 
@@ -52,7 +53,14 @@ class testFabric extends Component {
 
         Answers.logSignUp('Twitter', true);
 
-        Answers.logPurchase(24.99,'USD',true, 'Air Jordans', 'shoes', '987654');
+        Answers.logPurchase(24.99, 'USD', true, 'Air Jordans', 'shoes', '987654');
+        this._fabricInit();
+    }
+
+    _fabricInit() {
+        ErrorUtils.setGlobalHandler(err =>
+            Crashlytics.recordError(err)
+        )
     }
 }
 

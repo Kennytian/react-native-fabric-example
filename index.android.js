@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import {Crashlytics} from 'react-native-fabric';
+import ErrorUtils from 'ErrorUtils'
 
 class testFabric extends Component {
     render() {
@@ -42,7 +43,7 @@ class testFabric extends Component {
 
         Crashlytics.setBool('overtime', true);
 
-         Crashlytics.setString('organization', 'zhulux');
+        Crashlytics.setString('organization', 'zhulux');
 
         // Forces a native crash for testing
         //Crashlytics.crash();
@@ -55,6 +56,14 @@ class testFabric extends Component {
 
         // Record a non-fatal JS error on Android
         Crashlytics.logException('Forces a native crash for testing');
+
+        this._fabricInit();
+    }
+
+    _fabricInit() {
+        ErrorUtils.setGlobalHandler(err =>
+            Crashlytics.recordError(err)
+        )
     }
 }
 
