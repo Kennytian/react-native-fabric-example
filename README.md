@@ -53,7 +53,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.0'
     compile 'com.facebook.react:react-native:0.19.+'
 +       compile project(':react-native-fabric')
-    // below 3 lines is options, enable NDK crash reporting
 +       compile('com.crashlytics.sdk.android:crashlytics:2.6.2@aar') {
 +           transitive = true;
 +       }
@@ -103,4 +102,46 @@ protected List<ReactPackage> getPackages() {
 ```
 
 ## iOS
-TODO
+* Create Podfile file, input this code
+```
+pod 'Fabric'
+pod 'Crashlytics'
+```
+
+* Install dependencies file
+```
+pod install
+```
+
+* Run Script Build Phase, **NOTE**: this is error key
+```
+"${PODS_ROOT}/Fabric/run" d55aa2ee52b62b168e16dbf343aefb1d583c fc2b917c471645e97eb475232ad33912f2cac2a09e36d767d29b3
+```
+
+* info.Plist
+```diff
++ <key>Fabric</key>
++ <dict>
++     <key>APIKey</key>
++     <string>your key</string>
++ </dict>
+```
+
+* AppDelegate.m
+```diff
++ #import <Fabric/Fabric.h>
++ #import <Crashlytics/Crashlytics.h>
+
+......
+
+@implementation AppDelegate
+  (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions }
++    [Fabric with:@[[Crashlytics class]]];
+    return YES;
+}
+@end
+
+```
+
+
+https://docs.fabric.io/javadocs/answers/1.3.6/com/crashlytics/android/answers/Answers.html
