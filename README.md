@@ -108,7 +108,7 @@ protected List<ReactPackage> getPackages() {
 
 * Edit `android/app/proguard-rules.pro` to look like this:
 
-```
+```diff
 + # fabric
 
 + -keepattributes SourceFile,LineNumberTable
