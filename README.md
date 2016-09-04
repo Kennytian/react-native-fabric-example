@@ -120,10 +120,19 @@ protected List<ReactPackage> getPackages() {
 **ANDROID HELP REFERENCE** https://docs.fabric.io/android/javadocs.html
 
 ## iOS
-* Create Podfile file, input this code
+* Create **Podfile** file(**no extension name**), input this code
 ```
-pod 'Fabric'
-pod 'Crashlytics'
+# Uncomment this line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'testFabric' do
+  # Uncomment this line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for testFabric
+  pod 'Fabric'
+  pod 'Crashlytics'
+end
 ```
 
 * Install dependencies file
@@ -131,12 +140,12 @@ pod 'Crashlytics'
 pod install
 ```
 
-* Run Script Build Phase, **NOTE**: this is error key
+* Run Script Build Phase, **NOTE**: this is error code number
 ```
 "${PODS_ROOT}/Fabric/run" d55aa2ee52b62b168e16dbf343aefb1d583c fc2b917c471645e97eb475232ad33912f2cac2a09e36d767d29b3
 ```
 
-* info.Plist
+* Info.plist
 ```diff
 + <key>Fabric</key>
 + <dict>
