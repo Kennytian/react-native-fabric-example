@@ -1,6 +1,11 @@
 # react-native-fabric-example
 react native fabric example(iOS/Android)
 
+ ```
+ npm install --save react-native-fabric
+
+ ```
+
 ## Android
 
 * Edit `android/settings.gradle` to look like this:
@@ -101,6 +106,19 @@ protected List<ReactPackage> getPackages() {
 }
 ```
 
+* Edit `android/app/proguard-rules.pro` to look like this:
+
+```
++ # fabric
+
++ -keepattributes SourceFile,LineNumberTable
++ -keep public class * extends java.lang.Exception
++ -printmapping mapping.txt
+
+```
+
+**ANDROID HELP REFERENCE** https://docs.fabric.io/android/javadocs.html
+
 ## iOS
 * Create Podfile file, input this code
 ```
@@ -143,5 +161,4 @@ pod install
 
 ```
 
-
-https://docs.fabric.io/javadocs/answers/1.3.6/com/crashlytics/android/answers/Answers.html
+**APPLE HELP REFERENCE** https://docs.fabric.io/apple/appledocs.html
